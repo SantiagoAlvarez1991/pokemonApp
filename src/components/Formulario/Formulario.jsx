@@ -12,11 +12,6 @@ import Detalle from "./Detalle";
 // componentes puedan consumir un estado global.
 
 const Formulario = () => {
-  
-  
-  
-
-
   return (
     <>
       <header className="form-header">
