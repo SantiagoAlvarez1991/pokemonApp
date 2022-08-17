@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../context/ContextoFormulario";
 import PropTypes from "prop-types"
 
-const Input = ({ name, label, type = "text", reducerType =  "ACTUALIZAR_POKEMON", isfocus = false }) => {
+const Input = ({ name, label, type = "text", reducerType =  "ACTUALIZAR_POKEMON", isfocus = false, isSingleInput = true, types, typeKey,typeName }) => {
   // Aqui deberíamos acceder al estado global para poder obtener los datos
   // del formulario y una manera de actualizar los mismos.
   //const {handleData} = useContext(Context)
@@ -47,14 +47,33 @@ const Input = ({ name, label, type = "text", reducerType =  "ACTUALIZAR_POKEMON"
   return (
     <div className="input-contenedor">
       <label htmlFor={name}>{label}</label>
-      <input
-        type={type}
-        value={dataInput}
-        id={name}
-        onChange={onChange}
-        onBlur={onBlur}
-        ref={ref}
-      />
+      {isSingleInput 
+        ? 
+          <input
+            type={type}
+            value={dataInput}
+            id={name}
+            onChange={onChange}
+            onBlur={onBlur}
+            ref={ref}
+          />
+        : <select  
+            id={name}
+            name={name}
+            onChange={onChange}
+            onBlur={onBlur}
+            ref={ref}          
+          >
+            {types?.map(type=>(
+              <option key={type.name}>{type.name}</option>
+            ))}
+          {/* <option>1</option>
+          <option>2</option>
+          <option>3</option> */}
+
+          </select>
+      }
+      
     </div>
   );
 };
